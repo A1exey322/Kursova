@@ -1,0 +1,51 @@
+﻿@model WebApplication1.Models.DeviceByName
+
+@{
+    ViewBag.Title = $"Popular devices";
+    Layout = "_Layout";
+}
+
+@{
+    var cardStyle = "col-md-6";
+}
+
+<style>
+    .card-buttons-group {
+        text-align: right;
+        padding: 10px;
+    }
+</style>
+
+<div class="card col-md-12" style="margin: 10px;">
+    <div class="card-buttons-group">
+        <button class='btn btn-primary' id='compareBtnId'>Comparing</button>
+    </div>
+</div>
+
+
+
+    <div class="row">
+        @foreach (var device in Model.data.phones)
+        {
+            <div class="row row-cols-1 @cardStyle text-center">
+                
+                <div class="col" style="padding: 15px; padding-left: 60px">
+                    <div class="card">
+                        <img style="width: 400px; height:500px; margin-left:220px; "  src="@device.image" class="card-img-top card-image" alt="@device.phone_name.ToUpper()">
+                        <div class="card-body">
+                            <h5 class="card-title">Name: @device.phone_name.ToUpper()</h5>
+                            <p class="card-text">Model: @device.slug.Substring(0, device.slug.IndexOf('-'))</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Views: @device.slug </li>
+                            <li class="list-group-item">Details: @device.detail</li>
+                        </ul>
+                        <div class="card-body">
+                            <button class="btn btn-primary" onclick="openModal({ url: '/Phone/GetPhone', data: '@device.slug' })"
+                                    data-toggle="ajax-modal" data-target="Modal">Open</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>   

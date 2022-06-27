@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/191/191219.png">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/style/_layout.css"/>
+    <link rel="stylesheet" href="~/css/style/search.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">  
+    <title>@ViewData["Title"] - PhoneShop</title>
+</head>
+<body class="backgroundImage">
+<header>
+    <nav class="navbar navbar-expand-lg" style="background-color: white;">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index"> <img src="~/images/pngtree-flat-phone-png-image_4419022.jpg" style="width:45px; height: 45px; border-radius:10px;"> <span style="color:black; font-family:Impact; font-size:30px; background-color:white; border-radius:10px;">Devices</span></a>
+        <button class="navbar-toggler badge-light" style="border-radius:10px;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-square-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4 4a.5.5 0 0 0-.374.832l4 4.5a.5.5 0 0 0 .748 0l4-4.5A.5.5 0 0 0 12 6H4z" />
+            </svg>
+        </button>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                @if(!User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle paragraphLayout active text-black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family:'Comic Sans MS'; font-weight: bold;">
+                            Account
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <ul class="nav flex-column paragraphHome">
+                                            <li class="nav-item text-center">
+                                                <a class="nav-link active text-white" asp-controller="Account" asp-action="Register">
+                                                    Sign up
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link active text-white" asp-controller="Account" asp-action="Login">
+                                                    Sign in
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>    
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link paragraphLayout active text-black" asp-controller="Phone" asp-action="brands" style="font-family:'Comic Sans MS'; font-weight: bold;">
+                            Brands
+                        </a>
+                    </li>  
+                    <li class="nav-item dropdown">
+                        <a class="nav-link paragraphLayout active text-black" asp-controller="Phone" asp-action="Index" style="font-family:'Comic Sans MS'; font-weight: bold;">
+                            Search
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle paragraphLayout active text-black" href="#" data-toggle="dropdown" style="font-family:'Comic Sans MS'; font-weight: bold;">
+                            Admin
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <ul class="nav flex-column paragraphHome">
+                                             <li class="nav-item text-center">
+                                                <a class="nav-link active text-white" asp-controller="User" asp-action="GetUsers">
+                                                    Users
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>   
+                }
+            </ul>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="Profile" asp-action="ProfileInfo">
+                    <svg style="color: black; margin-left: 600px; " xmlns="http://www.w3.org/2000/svg" width="44" height="44" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    </svg>
+                </a>
+                 <form method="post" asp-controller="Account" asp-action="Logout">
+                    <input class="btn btn-danger " style="font-family:'Comic Sans MS'; font-weight: bold; font-size: 20px;"  type="submit" value="Logout" />
+                </form>
+                
+            }
+        </div>
+    </nav>
+</header>
+    <div class="container-fluid col-xl-12">
+    <main role="main">
+        @RenderBody()
+    </main>
+    </div>
+
+<div class="modal fade" id="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Info</h5>
+      </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger rounded btn-secondary" data-bs-dismiss="modal">Close</button>
+            @if (User.IsInRole("Admin"))
+            {
+                <button type="button" class="btn btn-primary" id="saveBtn">Save</button>   
+            }
+        </div>
+    </div>
+  </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script src="~/js/modal.js"></script>
+@await RenderSectionAsync("pageScripts", required: false)
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search</title>
+    @*<link rel="stylesheet" href="~/css/style/search.css">*@
+</head>
+<body>
+    <div>
+        <div style="padding: 15px;"></div>       
+               <div style="padding-left: 480px;">
+                        <div style="padding-left: 170px;">
+                            <h3>Device By Name</h3>
+                        </div>
+                    <div class="form_container_foroneitem">
+                        <form method="get" action="~/Phone/PhoneByName?name={name}">
+                            <div class="dws-input">
+                                <input type="text" name="name" placeholder="Name of device" required>
+
+                            </div>
+                            <button class="dws-submit" type="submit">Search</button>
+                        </form>
+                    </div>
+               </div>
+
+                @RenderBody() 
+    </div>
+</body>
+</html>
+

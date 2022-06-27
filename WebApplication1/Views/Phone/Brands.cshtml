@@ -1,0 +1,67 @@
+﻿@model WebApplication1.Models.Brand
+
+@{
+    ViewBag.Title = "All brands";
+    Layout = "_Layout";
+}
+
+@{
+    var cardStyle = "col-md-4";
+}
+
+<style>
+    .card-buttons-group {
+        text-align: right;
+        padding: 10px;
+    }
+</style>
+<div>
+        <div style="padding: 15px;"></div>
+
+                    
+               <div style="padding-left: 480px;">
+                        <div style="padding-left: 170px;">
+                            <h3>Device By Name</h3>
+                        </div>
+                    <div class="form_container_foroneitem">
+                        <form method="get" action="~/Phone/DeviceByBrand?brand={brand}">
+                            <div class="dws-input">
+                                <input type="text" brand="brand" placeholder="Name of brand" required>
+
+                            </div>
+                            <button class="dws-submit" type="submit">Search</button>
+                        </form>
+                    </div>
+               </div>
+</div>
+
+
+
+    <div class="row">
+        @foreach (var brand in Model.data)
+        {
+            <div class="row row-cols-1 @cardStyle text-center">
+                
+                <div class="col" style="padding: 15px; padding-left: 60px">
+                    <div class="card">
+                        <img src="https://sendpulse.com/blog/wp-content/uploads/2021/05/brand-positioning-cover-1-1200x900.png" class="card-img-top card-image" alt="@brand.brand_name">
+                        <div class="card-body">
+                            <h5 class="card-title">Name: @brand.brand_name</h5>
+                            <p class="card-text">Model: @brand.brand_slug.Substring(0, @brand.brand_slug.IndexOf('-'))</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Device count: @brand.device_count </li>
+                            <li class="list-group-item">Details: @brand.detail</li>
+                        </ul>
+
+                        <a asp-controller="Phone" asp-action="DeviceByBrand" asp-route-slug="@brand.brand_slug">Open</a>
+                        @*<div class="card-body">
+                            <button class="btn btn-primary">Open</button>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        }
+    </div>   
+
+ 

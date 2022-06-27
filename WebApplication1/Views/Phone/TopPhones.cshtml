@@ -1,0 +1,121 @@
+﻿@model WebApplication1.Models.TopPhones
+
+@{
+    ViewBag.Title = "Popular phones";
+    Layout = "_Layout";
+}
+
+@{
+    var cardStyle = "col-md-6";
+}
+
+<style>
+    .card-buttons-group {
+        text-align: right;
+        padding: 10px;
+    }
+</style>
+
+<div class="card col-md-12" style="margin: 10px;">
+    <div class="card-buttons-group">
+        <button class='btn btn-primary' id='compareBtnId'>Comparing</button>
+    </div>
+</div>
+
+
+
+    <div class="row">
+        @foreach (var phone in Model.data.phones)
+        {
+            <div class="row row-cols-1 @cardStyle text-center">
+                
+                <div class="col" style="padding: 15px; padding-left: 60px">
+                    <div class="card">
+                        <img src="@Model.image" class="card-img-top card-image" alt="@phone.phone_name">
+                        <div class="card-body">
+                            <h5 class="card-title">Name: @phone.phone_name</h5>
+                            <p class="card-text">Model: @phone.slug.Substring(0, @phone.slug.IndexOf('-'))</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Views: @phone.hits </li>
+                            <li class="list-group-item">Deatails: @phone.detail</li>
+                        </ul>
+                        <div class="card-body">
+                            <button class="btn btn-primary" onclick="openModal({ url: '/Phone/GetPhone', data: '@phone.slug' })"
+                                    data-toggle="ajax-modal" data-target="Modal">Open</button>
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>   
+
+@section pageScripts {
+    
+    <script src="~/js/modal.js"></script>
+    <script>
+       let modal = $('#modal'); 
+    
+       function model() { 
+            return {
+                name: $('input#Name').val(),
+                model: $('input#Model').val(),
+                price: $('input#Price').val(),
+                description: $('input#Description').val(),
+                avatar: $('input#Avatar').val(),
+            }
+        };
+        
+        function like(phone) {
+            $.ajax({
+                url: '@Url.Action("LikeDevice")',
+                type: 'Post',
+                data: phone,
+            });
+        } 
+       
+       $('#saveBtn').on('click', function () {
+           $.ajax({
+               url: '@Url.Action("Save")',
+               type: 'POST',
+               data: model(),
+           }) 
+        });
+        
+       $('#compareBtnId').on('click', function (){
+           $.ajax({
+               type: 'GET',
+               url : '@Url.Action("Compare")',
+               success: function (response) {
+                   $('.modal-dialog').addClass("modal-lg");
+                   modal.find(".modal-body").html(response);
+                   modal.modal('show')
+               }
+           });
+       });
+        
+       $(".btn-close").click(function(){
+            modal.modal('hide');
+       });
+       
+       $('#addCarId').on('click', function () {
+           $.ajax({
+              type: 'GET',
+              url : '/Car/Save',
+              success: function (response) {
+                  $('.modal-dialog').removeClass("modal-lg");
+                  modal.find(".modal-body").html(response);
+                  modal.modal('show')
+              },
+              failure: function () {
+                modal.modal('hide')
+              },
+              error: function (response) {
+                  alert(response.responseText);
+              }
+          });
+       });
+       
+    </script>
+}

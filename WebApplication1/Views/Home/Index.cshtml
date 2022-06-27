@@ -1,0 +1,154 @@
+﻿@{
+    ViewData["Title"] = "Головна";
+}
+
+<div style="padding: 10px;"></div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="card col-md-12">
+            <div class="card-body">
+                <h6 class="card-title text-center">Welcome to Device-API!</h6>
+                <p class="card-text"><small class="text-muted">Gryshchenko Alexey</small></p>
+            </div>
+        </div>
+        <div style="padding: 10px;"></div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://www.reviews.org/app/uploads/2021/01/s21-range.jpg" class="card-img-top card-image"/>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Samsung</h5>
+                             <p class="card-text">
+                                Samsung —South Korean group of companies, one of the largest chaebols, founded in 1938.
+                                It is known on the world market as a manufacturer of high-tech components, audio and video devices.
+                                The main office of the company is located in Seoul.
+                             </p> 
+                        </div>
+                    <div class="card-footer text-center">
+                        <a asp-controller="Phone" asp-action="Topphones" class="card-link">Popular phones</a>
+                    </div>
+                </div>
+            </div> 
+          <div class="col">
+            <div class="card h-100">
+                <img src="https://m-cdn.phonearena.com/images/hub/162-wide-two_500/Apple-iPhone-14-release-date-price-features-and-news.jpg" class="card-img-top card-image"/>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Iphone</h5>
+                        <p class="card-text">Iphone — a series of smartphones developed by Apple Corporation. Work under the iOS operating system.</p>
+                    </div>
+              
+              <div class="card-footer text-center">
+                <a asp-controller="Phone" asp-action="Watches" class="card-link">Popular watches</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb5ra7SNeu2aqTsCHdUyEHG1JHFAatVHnxnX3M5ExOjCeFbXrM4znsalX28klaFJj0ils&usqp=CAU" class="card-img-top card-image"/>
+              <div class="card-body text-center">
+                <h5 class="card-title">Xiaomi</h5>
+                <p class="card-text">Xiaomi — Chinese corporation founded by Lei Jun in 2010. Produce household appliances, tablets, smart watches, electric scooters and much more.</p>
+              </div>
+              <div class="card-footer text-center">
+                <a asp-controller="Phone" asp-action="Topphones" class="card-link">Popular phones</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding: 10px;"></div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">You can:</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">- Choose the device model that suits you</li>
+                <li class="list-group-item">- View its characteristics</li>
+                <li class="list-group-item">- Compare with other devices</li>
+                <li class="list-group-item">- Purchase this device</li>
+            </ul>
+            <a href="#" class="card-link">Go Up</a>
+          </div>
+        </div>
+
+        <div style="padding: 10px;"></div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">The most popular phones</h5>
+          </div>
+          <ul class="list-group list-group-flush" id="ulListId">
+            <li class="list-group-item">Iphone — the most common variant</li>
+            <li class="list-group-item">Samsung — iPhone's eternal rival</li>
+            <li class="list-group-item">Xiaomi — inexpensive but very functional</li>
+            <li class="list-group-item">Nokia — proven over the years</li>
+          </ul>
+          <div class="card-body">
+            <button class="btn btn-danger" id="btnHideId">Hide</button>
+            <button class="btn btn-primary" id="btnShowId">Show</button>
+          </div>
+        </div>
+    }
+    else
+    {
+      <div class="card">
+        <div class="card-header">
+          You are not logged in!
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p>You must be logged in to view content.</p>
+          </blockquote>
+        </div>
+      </div>
+  
+      <div style="padding: 10px;"></div>
+  
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card h-100">
+            <img src="https://sparkimg.nl/cdn-cgi/image/w=320,h=320,fit=pad,g=auto,f=auto/https://static.iphoned.nl/orca/products/11685/apple-iphone-12.jpg" class="card-img-top" alt="Iphone">
+            <div class="card-body">
+              <h5 class="card-title text-center">Not available</h5>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Iphone</small>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="https://images.samsung.com/is/image/samsung/p6pim/nl/2202/gallery/nl-galaxy-s22-ultra-s908-sm-s908bdrdeub-thumb-530816505" class="card-img-top" alt="Samsung">
+            <div class="card-body">
+              <h5 class="card-title text-center">Not available</h5>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Samsung</small>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="https://i01.appmifile.com/v1/MI_18455B3E4DA706226CF7535A58E875F0267/pms_1647246329.98233420.png" class="card-img-top" alt="Xiaomi">
+            <div class="card-body">
+              <h5 class="card-title text-center">Not available</h5>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Xiaomi</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
+@section pageScripts
+{
+    <script>
+    
+    $('#btnHideId').click(function(){
+      $('#ulListId').hide(2000);
+    });
+    
+    $('#btnShowId').click(function () {
+      $('#ulListId').show(2000);
+    });
+  </script>
+}

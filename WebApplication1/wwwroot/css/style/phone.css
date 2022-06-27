@@ -1,0 +1,119 @@
+﻿﻿.content {
+    margin-top: 30px;
+    background-color: rgba(199, 199, 199, 0.8);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 30px;
+}
+
+.info {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px -15px;
+}
+
+.info__item {
+    margin: 10px 100px;
+    width: 85%;
+    padding: 0 15px;
+}
+
+.descript__item {
+    margin-bottom: -5px;
+    border: 4px solid white;
+    background-color: #052771;
+}
+
+
+.accordionItemHeading:after {
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-top: 6px solid white;
+    border-right: 6px solid white;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    z-index: 1;
+    transform: translateY(-50%) rotate(135deg);
+}
+
+.descript__title {
+    font-size: 20px;
+    color: white;
+    text-transform: uppercase;
+}
+
+.descript__title_country {
+    font-size: 18px;
+    color: white;
+    text-transform: uppercase;
+}
+
+
+.close .accordionItemContent {
+    background-color: rgba(199, 199, 199, 0.8);
+    border-radius: 30px;
+    height: 0px;
+    transition: height 1s ease-out;
+    -webkit-transform: scaleY(0);
+    -o-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    transform: scaleY(0);
+    float: left;
+    display: block;
+}
+
+.open .accordionItemContent {
+    padding: 5px 20px;
+    display: none;
+    font-size: 15px;
+    color: white;
+    font-weight: 300;
+    margin-top: 30px;
+    background-color: rgba(199, 199, 199, 0.8);
+    border-radius: 30px;
+    background-color: #851245;
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+    display: block;
+    -webkit-transform: scaleY(1);
+    -o-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: top;
+    -o-transform-origin: top;
+    -ms-transform-origin: top;
+    transform-origin: top;
+    -webkit-transition: -webkit-transform 0.4s ease-out;
+    -o-transition: -o-transform 0.4s ease;
+    -ms-transition: -ms-transform 0.4s ease;
+    transition: transform 0.4s ease;
+    box-sizing: border-box;
+}
+
+.open .accordionItemHeading {
+    padding: 5px 8px 5px 5px;
+    position: relative;
+    border-bottom: 4px solid transparent;
+    cursor: pointer;
+    border-bottom-color: #e5e5e5;
+}
+
+    .open .accordionItemHeading:after {
+        transform: translateY(-50%) rotate(-45deg);
+        margin-top: 5px;
+    }
+
+.close .accordionItemHeading {
+    padding: 5px 8px 0px 5px;
+    position: relative;
+    border-bottom: 4px solid transparent;
+}
+
+.accordionItem {
+    margin-bottom: -5px;
+    border: 4px solid white;
+    background-color: #851245;
+}

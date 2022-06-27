@@ -1,0 +1,48 @@
+﻿@using WebApplication1.Models
+@model DeviceByName
+@{
+    Layout = "_Layout";
+    Layout = "~/Views/Search.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search</title>
+    <link rel="stylesheet" href="~/css/style/phone.css"/>
+    <link rel="stylesheet" href="~/css/style/search.css"/>
+</head>
+<body>
+    <div class="content">
+        @if (Model != null)
+        {
+        @foreach (var item in Model.data.phones)
+            {
+        <div class="info">
+            <div class="info__item">
+                <div class="descript">
+                    <div class="accordionItem close" >
+                        <div class="accordionItemHeading">                         
+                            <img style="width: 65px; height:60px; float:left; padding-right:5px" src= @item.image alt="@item.phone_name " />
+                            <div class="descript__title"><b>@item.phone_name</b></div>
+                            <div class="descript__title"><b>@item.slug</b></div>
+                        </div>
+                        <div class="accordionItemContent">
+                            <p><b>Brand: </b> @item.brand</p>
+                            <p><b>Detail: </b> @item.detail</p>
+                            <p><b>Name: </b> @item.phone_name</p>
+                            
+                            <button class="dws-submit" onclick="openModal({ url: '/Phone/GetPhone', data: '@item.slug' })"
+                                   data-toggle="ajax-modal" data-target="Modal">Open</button>                              
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            }
+        }
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="~/js/app.js"></script>
+</body>
+</html>
